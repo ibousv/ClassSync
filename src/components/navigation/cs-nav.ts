@@ -1,112 +1,114 @@
 import { LitElement, html, css } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { tokens } from '../shared/design-tokens'
 
 @customElement('cs-nav')
 export class CsNav extends LitElement {
   @property({ type: Boolean }) collapsed = false
 
-  static styles = css`
-    :host {
-      display: block;
-      width: 240px;
-      height: 100vh;
-      background: #fbfbfa;
-      border-right: 1px solid #e9e9e7;
-      transition: width 0.2s ease;
-    }
+  static styles = [
+    tokens,
+    css`
+      :host {
+        display: block;
+        width: 240px;
+        height: 100vh;
+        background: var(--cs-sync-background);
+        border-right: 1px solid var(--cs-sync-border);
+        font-family: var(--cs-sync-font-family);
+      }
 
-    nav {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      padding: 0.5rem;
-    }
+      nav {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: var(--cs-sync-space-md);
+      }
 
-    .logo {
-      padding: 0.75rem 0.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      color: #37352f;
-      margin-bottom: 0.5rem;
-    }
+      .logo {
+        padding: var(--cs-sync-space-sm) 0;
+        font-size: var(--cs-sync-font-size-lg);
+        font-weight: var(--cs-sync-font-weight-semibold);
+        color: var(--cs-sync-primary);
+        margin-bottom: var(--cs-sync-space-md);
+      }
 
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.375rem 0.5rem;
-      border-radius: 0.25rem;
-      cursor: pointer;
-      transition: background 0.15s;
-      text-decoration: none;
-      color: #37352f;
-      font-size: 0.875rem;
-      font-weight: 500;
-    }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: var(--cs-sync-space-sm);
+        padding: var(--cs-sync-space-sm) var(--cs-sync-space-md);
+        border-radius: var(--cs-sync-radius-md);
+        cursor: pointer;
+        transition: background var(--cs-sync-transition-fast);
+        text-decoration: none;
+        color: var(--cs-sync-text-secondary);
+        font-size: var(--cs-sync-font-size-sm);
+        font-weight: var(--cs-sync-font-weight-medium);
+        margin-bottom: var(--cs-sync-space-xs);
+      }
 
-    .nav-item:hover {
-      background: rgba(0, 0, 0, 0.03);
-    }
+      .nav-item:hover {
+        background: var(--cs-sync-background-secondary);
+        color: var(--cs-sync-text-primary);
+      }
 
-    .nav-item.active {
-      background: rgba(0, 0, 0, 0.05);
-    }
+      .nav-item.active {
+        background: var(--cs-sync-background-tertiary);
+        color: var(--cs-sync-primary);
+      }
 
-    .nav-icon {
-      font-size: 1.125rem;
-      width: 1.25rem;
-      height: 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .nav-icon {
+        font-size: var(--cs-sync-font-size-md);
+        width: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .divider {
-      height: 1px;
-      background: #e9e9e7;
-      margin: 0.5rem 0;
-    }
+      .spacer {
+        flex: 1;
+      }
 
-    .spacer {
-      flex: 1;
-    }
+      .user-section {
+        padding-top: var(--cs-sync-space-md);
+        border-top: 1px solid var(--cs-sync-border);
+      }
 
-    .user-section {
-      padding: 0.5rem;
-      border-top: 1px solid #e9e9e7;
-    }
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: var(--cs-sync-space-sm);
+        padding: var(--cs-sync-space-sm);
+        border-radius: var(--cs-sync-radius-md);
+        cursor: pointer;
+        transition: background var(--cs-sync-transition-fast);
+      }
 
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.375rem 0.5rem;
-      border-radius: 0.25rem;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
+      .user-info:hover {
+        background: var(--cs-sync-background-secondary);
+      }
 
-    .user-info:hover {
-      background: rgba(0, 0, 0, 0.03);
-    }
+      .avatar {
+        width: 2rem;
+        height: 2rem;
+        border-radius: var(--cs-sync-radius-md);
+        background: var(--cs-sync-primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--cs-sync-font-size-xs);
+        font-weight: var(--cs-sync-font-weight-semibold);
+      }
 
-    .avatar {
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 0.25rem;
-      background: #e9e9e7;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-    }
-
-    .user-name {
-      font-size: 0.875rem;
-      color: #37352f;
-      font-weight: 500;
-    }
-  `
+      .user-name {
+        font-size: var(--cs-sync-font-size-sm);
+        color: var(--cs-sync-text-primary);
+        font-weight: var(--cs-sync-font-weight-medium);
+      }
+    `,
+  ]
 
   render() {
     return html`

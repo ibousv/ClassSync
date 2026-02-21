@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit'
 import { customElement, property, state } from 'lit/decorators.js'
+import { tokens } from '../shared/design-tokens'
 
 interface CalendarEvent {
   id: string
@@ -15,108 +16,134 @@ export class CsCalendar extends LitElement {
   @state() private currentDate = new Date()
   @state() private view: 'month' | 'week' = 'month'
 
-  static styles = css`
-    :host {
-      display: block;
-      width: 100%;
-    }
+  static styles = [
+    tokens,
+    css`
+      :host {
+        display: block;
+        width: 100%;
+        font-family: var(--cs-sync-font-family);
+      }
 
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem;
-      border-bottom: 1px solid #e5e5e5;
-    }
+      .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--cs-sync-space-md);
+        border-bottom: 1px solid var(--cs-sync-border);
+      }
 
-    .calendar-nav {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
+      .calendar-nav {
+        display: flex;
+        gap: var(--cs-sync-space-sm);
+        align-items: center;
+      }
 
-    .nav-btn {
-      padding: 0.5rem 1rem;
-      border: 1px solid #e5e5e5;
-      border-radius: 0.5rem;
-      background: white;
-      cursor: pointer;
-    }
+      .nav-btn {
+        padding: var(--cs-sync-space-sm) var(--cs-sync-space-md);
+        border: 1px solid var(--cs-sync-border);
+        border-radius: var(--cs-sync-radius-md);
+        background: var(--cs-sync-background);
+        cursor: pointer;
+        transition: all var(--cs-sync-transition-fast);
+        font-family: var(--cs-sync-font-family);
+        color: var(--cs-sync-text-primary);
+      }
 
-    .nav-btn:hover {
-      background: #f5f5f5;
-    }
+      .nav-btn:hover {
+        background: var(--cs-sync-background-secondary);
+        border-color: var(--cs-sync-primary);
+      }
 
-    .calendar-title {
-      font-weight: 600;
-      font-size: 1.25rem;
-    }
+      .calendar-title {
+        font-weight: var(--cs-sync-font-weight-semibold);
+        font-size: var(--cs-sync-font-size-lg);
+        color: var(--cs-sync-text-primary);
+      }
 
-    .view-toggle {
-      display: flex;
-      gap: 0.25rem;
-    }
+      .view-toggle {
+        display: flex;
+        gap: 0;
+        border: 1px solid var(--cs-sync-border);
+        border-radius: var(--cs-sync-radius-md);
+        overflow: hidden;
+      }
 
-    .view-btn {
-      padding: 0.5rem 1rem;
-      border: 1px solid #e5e5e5;
-      background: white;
-      cursor: pointer;
-    }
+      .view-btn {
+        padding: var(--cs-sync-space-sm) var(--cs-sync-space-md);
+        border: none;
+        background: var(--cs-sync-background);
+        cursor: pointer;
+        transition: all var(--cs-sync-transition-fast);
+        font-size: var(--cs-sync-font-size-sm);
+        font-weight: var(--cs-sync-font-weight-medium);
+        color: var(--cs-sync-text-secondary);
+        font-family: var(--cs-sync-font-family);
+      }
 
-    .view-btn:first-child {
-      border-radius: 0.5rem 0 0 0.5rem;
-    }
+      .view-btn + .view-btn {
+        border-left: 1px solid var(--cs-sync-border);
+      }
 
-    .view-btn:last-child {
-      border-radius: 0 0.5rem 0.5rem 0;
-    }
+      .view-btn:hover {
+        background: var(--cs-sync-background-secondary);
+      }
 
-    .view-btn.active {
-      background: #1a1a1a;
-      color: white;
-    }
+      .view-btn.active {
+        background: var(--cs-sync-primary);
+        color: white;
+      }
 
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 1px;
-      background: #e5e5e5;
-      border: 1px solid #e5e5e5;
-    }
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 1px;
+        background: var(--cs-sync-border);
+        border: 1px solid var(--cs-sync-border);
+      }
 
-    .calendar-day {
-      background: white;
-      min-height: 100px;
-      padding: 0.5rem;
-    }
+      .calendar-day {
+        background: var(--cs-sync-background);
+        min-height: 100px;
+        padding: var(--cs-sync-space-sm);
+      }
 
-    .day-number {
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-    }
+      .day-number {
+        font-weight: var(--cs-sync-font-weight-semibold);
+        font-size: var(--cs-sync-font-size-sm);
+        color: var(--cs-sync-text-primary);
+        margin-bottom: var(--cs-sync-space-sm);
+      }
 
-    .event-item {
-      font-size: 0.75rem;
-      padding: 0.25rem;
-      margin-bottom: 0.25rem;
-      border-radius: 0.25rem;
-      background: #f5f5f5;
-      cursor: pointer;
-    }
+      .event-item {
+        font-size: var(--cs-sync-font-size-xs);
+        padding: var(--cs-sync-space-xs);
+        margin-bottom: var(--cs-sync-space-xs);
+        border-radius: var(--cs-sync-radius-sm);
+        cursor: pointer;
+        transition: opacity var(--cs-sync-transition-fast);
+      }
 
-    .event-item.course {
-      background: #dbeafe;
-    }
+      .event-item:hover {
+        opacity: 0.8;
+      }
 
-    .event-item.exam {
-      background: #fee2e2;
-    }
+      .event-item.course {
+        background: var(--cs-sync-info);
+        color: white;
+      }
 
-    .event-item.event {
-      background: #dcfce7;
-    }
-  `
+      .event-item.exam {
+        background: var(--cs-sync-error);
+        color: white;
+      }
+
+      .event-item.event {
+        background: var(--cs-sync-success);
+        color: white;
+      }
+    `,
+  ]
 
   private getMonthName() {
     return this.currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })

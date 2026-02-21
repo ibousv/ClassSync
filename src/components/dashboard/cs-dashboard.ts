@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
+import { tokens } from '../shared/design-tokens'
 
 interface DashboardData {
   user: {
@@ -27,128 +28,131 @@ export class CsDashboard extends LitElement {
     recentActivity: []
   }
 
-  static styles = css`
-    :host {
-      display: block;
-      width: 100%;
-    }
+  static styles = [
+    tokens,
+    css`
+      :host {
+        display: block;
+        width: 100%;
+        font-family: var(--cs-sync-font-family);
+      }
 
-    .greeting {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #37352f;
-      margin-bottom: 0.25rem;
-      letter-spacing: -0.02em;
-    }
+      .greeting {
+        font-size: var(--cs-sync-font-size-xxl);
+        font-weight: var(--cs-sync-font-weight-bold);
+        color: var(--cs-sync-text-primary);
+        margin-bottom: var(--cs-sync-space-xl);
+        line-height: var(--cs-sync-line-height-sm);
+      }
 
-    .stats-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-    }
+      .stats-grid {
+        display: grid;
+        gap: var(--cs-sync-space-md);
+        margin-bottom: var(--cs-sync-space-xl);
+      }
 
-    .stat-card {
-      padding: 0.75rem 1rem;
-      background: #f7f6f3;
-      border-radius: 0.25rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
+      .stat-card {
+        padding: var(--cs-sync-space-md);
+        background: var(--cs-sync-background);
+        border: 1px solid var(--cs-sync-border);
+        border-radius: var(--cs-sync-radius-md);
+        display: flex;
+        align-items: center;
+        gap: var(--cs-sync-space-md);
+        cursor: pointer;
+        transition: all var(--cs-sync-transition-fast);
+      }
 
-    .stat-card:hover {
-      background: #eeede9;
-    }
+      .stat-card:hover {
+        box-shadow: var(--cs-sync-shadow-md);
+        border-color: var(--cs-sync-primary);
+      }
 
-    .stat-icon {
-      font-size: 1.25rem;
-    }
+      .stat-icon {
+        font-size: var(--cs-sync-font-size-xl);
+      }
 
-    .stat-content {
-      flex: 1;
-    }
+      .stat-content {
+        flex: 1;
+      }
 
-    .stat-title {
-      font-weight: 500;
-      color: #37352f;
-      font-size: 0.9375rem;
-    }
+      .stat-title {
+        font-weight: var(--cs-sync-font-weight-semibold);
+        color: var(--cs-sync-text-primary);
+        font-size: var(--cs-sync-font-size-md);
+        line-height: var(--cs-sync-line-height-sm);
+      }
 
-    .stat-subtitle {
-      font-size: 0.8125rem;
-      color: #787774;
-    }
+      .stat-subtitle {
+        font-size: var(--cs-sync-font-size-xs);
+        color: var(--cs-sync-text-tertiary);
+        margin-top: var(--cs-sync-space-xs);
+      }
 
-    .section {
-      margin-bottom: 2rem;
-    }
+      .section-title {
+        font-size: var(--cs-sync-font-size-lg);
+        font-weight: var(--cs-sync-font-weight-semibold);
+        color: var(--cs-sync-text-primary);
+        margin-bottom: var(--cs-sync-space-md);
+      }
 
-    .section-title {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: #37352f;
-      margin-bottom: 1rem;
-    }
+      .activity-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--cs-sync-space-sm);
+      }
 
-    .activity-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
+      .activity-item {
+        padding: var(--cs-sync-space-md);
+        border: 1px solid var(--cs-sync-border);
+        border-radius: var(--cs-sync-radius-md);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        transition: all var(--cs-sync-transition-fast);
+      }
 
-    .activity-item {
-      padding: 0.75rem 1rem;
-      border: 1px solid #e9e9e7;
-      border-radius: 0.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
+      .activity-item:hover {
+        background: var(--cs-sync-background-secondary);
+        border-color: var(--cs-sync-primary);
+      }
 
-    .activity-item:hover {
-      background: rgba(0, 0, 0, 0.02);
-    }
+      .activity-content {
+        display: flex;
+        align-items: center;
+        gap: var(--cs-sync-space-sm);
+      }
 
-    .activity-content {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+      .activity-type {
+        font-size: var(--cs-sync-font-size-xs);
+        padding: var(--cs-sync-space-xs) var(--cs-sync-space-sm);
+        background: var(--cs-sync-background-tertiary);
+        border-radius: var(--cs-sync-radius-sm);
+        color: var(--cs-sync-text-secondary);
+        text-transform: uppercase;
+        font-weight: var(--cs-sync-font-weight-medium);
+      }
 
-    .activity-type {
-      font-size: 0.75rem;
-      padding: 0.125rem 0.5rem;
-      background: #e9e9e7;
-      border-radius: 0.25rem;
-      color: #787774;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
+      .activity-title {
+        font-weight: var(--cs-sync-font-weight-medium);
+        color: var(--cs-sync-text-primary);
+        font-size: var(--cs-sync-font-size-sm);
+      }
 
-    .activity-title {
-      font-weight: 500;
-      color: #37352f;
-      font-size: 0.9375rem;
-    }
+      .activity-time {
+        font-size: var(--cs-sync-font-size-xs);
+        color: var(--cs-sync-text-tertiary);
+      }
 
-    .activity-time {
-      font-size: 0.8125rem;
-      color: #787774;
-    }
-
-    .empty-state {
-      padding: 3rem 1rem;
-      text-align: center;
-      color: #787774;
-      font-size: 0.9375rem;
-    }
-  `
+      .empty-state {
+        padding: var(--cs-sync-space-xl);
+        text-align: center;
+        color: var(--cs-sync-text-tertiary);
+        font-size: var(--cs-sync-font-size-sm);
+      }
+    `,
+  ]
 
   render() {
     return html`
@@ -175,20 +179,16 @@ export class CsDashboard extends LitElement {
           <div class="stat-card">
             <span class="stat-icon">⭐</span>
             <div class="stat-content">
-              <div class="stat-title">${this.data.user.karma} Karma points</div>
+              <div class="stat-title">${this.data.user.karma} Karma</div>
               <div class="stat-subtitle">Keep contributing</div>
             </div>
           </div>
         </div>
 
-        <div class="section">
+        <div>
           <h2 class="section-title">Recent activity</h2>
           ${this.data.recentActivity.length === 0
-            ? html`
-                <div class="empty-state">
-                  No recent activity
-                </div>
-              `
+            ? html`<div class="empty-state">No recent activity</div>`
             : html`
                 <div class="activity-list">
                   ${this.data.recentActivity.map(

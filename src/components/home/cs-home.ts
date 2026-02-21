@@ -1,117 +1,125 @@
 import { LitElement, html, css } from 'lit'
 import { customElement } from 'lit/decorators.js'
+import { tokens } from '../shared/design-tokens'
 
 @customElement('cs-home')
 export class CsHome extends LitElement {
-  static styles = css`
-    :host {
-      display: block;
-      width: 100%;
-    }
+  static styles = [
+    tokens,
+    css`
+      :host {
+        display: block;
+        width: 100%;
+        font-family: var(--cs-sync-font-family);
+      }
 
-    .hero {
-      text-align: center;
-      padding: 4rem 2rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
+      .hero {
+        text-align: center;
+        padding: var(--cs-sync-space-xl) var(--cs-sync-space-md);
+        max-width: 800px;
+        margin: 0 auto;
+      }
 
-    .logo {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
+      .logo {
+        font-size: 3rem;
+        margin-bottom: var(--cs-sync-space-md);
+      }
 
-    .title {
-      font-size: 3rem;
-      font-weight: 700;
-      color: #37352f;
-      margin-bottom: 1rem;
-      letter-spacing: -0.03em;
-    }
+      .title {
+        font-size: var(--cs-sync-font-size-xxl);
+        font-weight: var(--cs-sync-font-weight-bold);
+        color: var(--cs-sync-text-primary);
+        margin-bottom: var(--cs-sync-space-md);
+        line-height: var(--cs-sync-line-height-sm);
+      }
 
-    .subtitle {
-      font-size: 1.25rem;
-      color: #787774;
-      margin-bottom: 2rem;
-      line-height: 1.6;
-    }
+      .subtitle {
+        font-size: var(--cs-sync-font-size-lg);
+        color: var(--cs-sync-text-secondary);
+        margin-bottom: var(--cs-sync-space-xl);
+        line-height: var(--cs-sync-line-height-lg);
+      }
 
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin-bottom: 4rem;
-    }
+      .cta-buttons {
+        display: flex;
+        gap: var(--cs-sync-space-md);
+        justify-content: center;
+        margin-bottom: var(--cs-sync-space-xl);
+      }
 
-    .btn {
-      padding: 0.75rem 1.5rem;
-      border-radius: 0.25rem;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.15s;
-      text-decoration: none;
-      border: none;
-    }
+      .btn {
+        padding: var(--cs-sync-space-md) var(--cs-sync-space-xl);
+        border-radius: var(--cs-sync-radius-md);
+        font-size: var(--cs-sync-font-size-md);
+        font-weight: var(--cs-sync-font-weight-semibold);
+        cursor: pointer;
+        transition: all var(--cs-sync-transition-fast);
+        text-decoration: none;
+        border: none;
+        font-family: var(--cs-sync-font-family);
+      }
 
-    .btn-primary {
-      background: #37352f;
-      color: white;
-    }
+      .btn-primary {
+        background: var(--cs-sync-primary);
+        color: white;
+      }
 
-    .btn-primary:hover {
-      background: #2d2b28;
-    }
+      .btn-primary:hover {
+        background: var(--cs-sync-primary-hover);
+      }
 
-    .btn-secondary {
-      background: #f7f6f3;
-      color: #37352f;
-    }
+      .btn-secondary {
+        background: var(--cs-sync-background-secondary);
+        color: var(--cs-sync-text-primary);
+        border: 1px solid var(--cs-sync-border);
+      }
 
-    .btn-secondary:hover {
-      background: #eeede9;
-    }
+      .btn-secondary:hover {
+        background: var(--cs-sync-background-tertiary);
+      }
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--cs-sync-space-xl);
+        padding: var(--cs-sync-space-xl) var(--cs-sync-space-md);
+        max-width: 1000px;
+        margin: 0 auto;
+      }
 
-    .feature {
-      text-align: center;
-    }
+      .feature {
+        text-align: center;
+        padding: var(--cs-sync-space-md);
+      }
 
-    .feature-icon {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
+      .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: var(--cs-sync-space-md);
+      }
 
-    .feature-title {
-      font-size: 1.125rem;
-      font-weight: 600;
-      color: #37352f;
-      margin-bottom: 0.5rem;
-    }
+      .feature-title {
+        font-size: var(--cs-sync-font-size-lg);
+        font-weight: var(--cs-sync-font-weight-semibold);
+        color: var(--cs-sync-text-primary);
+        margin-bottom: var(--cs-sync-space-sm);
+      }
 
-    .feature-desc {
-      font-size: 0.9375rem;
-      color: #787774;
-      line-height: 1.5;
-    }
+      .feature-desc {
+        font-size: var(--cs-sync-font-size-sm);
+        color: var(--cs-sync-text-secondary);
+        line-height: var(--cs-sync-line-height-md);
+      }
 
-    .footer {
-      text-align: center;
-      padding: 2rem;
-      color: #787774;
-      font-size: 0.875rem;
-      border-top: 1px solid #e9e9e7;
-      margin-top: 4rem;
-    }
-  `
+      .footer {
+        text-align: center;
+        padding: var(--cs-sync-space-xl);
+        color: var(--cs-sync-text-tertiary);
+        font-size: var(--cs-sync-font-size-sm);
+        border-top: 1px solid var(--cs-sync-border);
+        margin-top: var(--cs-sync-space-xl);
+      }
+    `,
+  ]
 
   private handleGetStarted() {
     this.dispatchEvent(
