@@ -17,8 +17,8 @@ Open-source collaborative platform for academic management and student mutual as
 
 ```bash
 # Clone repository
-git clone https://github.com/your-org/classsync.git
-cd classsync
+git clone https://github.com/ibousv/ClassSync.git
+cd ClassSync
 
 # Install dependencies
 pnpm install
